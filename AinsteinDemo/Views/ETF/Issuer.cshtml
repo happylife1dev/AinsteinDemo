@@ -1,0 +1,196 @@
+﻿@*
+    ----------------------------------------------------------------------------
+    Copyright (c) Microsoft Corporation.
+    Licensed under the MIT license.
+    ----------------------------------------------------------------------------
+*@
+
+@model AinsteinDemo.Models.ReportEmbedConfig
+
+@{ ViewBag.Title = "Issuer";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form>
+            <!-- <div class="btn-search-group">
+                                <div class="btn-group" role="group">
+                                    <button type="button" onclick="setActivePage('ReportSection', this)" class="btn btn-primary btn-ai active">Issuer</button>
+                                    <button type="button" onclick="setActivePage('ReportSectioncf5bd502357da74e4d6e', this)" class="btn btn-primary btn-ai">Type</button>
+                                </div>
+                                <div class="theme-ai-tagsinput">
+                    <input type="text" id="etf-issuer-tags" />
+                </div>
+            </div> -->
+            <div class="form-group searchBar btn-search-group">
+                <div class="btn-group mr-2" role="group">
+                    <button type="button" onclick="setActivePage('ReportSection', this)" class="btn btn-primary btn-ai active">Issuer</button>
+                    <button type="button" onclick="setActivePage('ReportSectioncf5bd502357da74e4d6e', this)" class="btn btn-primary btn-ai">Type</button>
+                </div>
+                <input class="form-control" id="etf-issuer-tags" placeholder="">
+                <!-- <button type="submit"><i class="fas fa-search"></i></button> -->
+            </div>
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="row">
+                    <div class="col-12 menu-tab">
+                        <ul id="nav-tab" role="tablist">
+                            <li>
+                                <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                                   aria-controls="nav-issuer" aria-selected="false" tabindex="-1">
+                                    Constituents Cube
+                                </a>
+                            </li>
+                            <li>
+                                <a id="nav-industry-tab" data-toggle="tab" href="/ETF/Industry/0"
+                                   aria-controls="nav-industry" aria-selected="false" tabindex="-1">
+                                    ETF Tracker
+                                </a>
+                            </li>
+                            <li>
+                                <a class="active" id="nav-issuer-tab" data-toggle="tab" href="/ETF/Issuer/1"
+                                   aria-controls="nav-issuer" aria-selected="true" tabindex="0">
+                                    ETF Issuer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-4">
+
+                    <div id="embedContainer"></div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Bootstrap the embed container for report
+    powerbi.bootstrap(reportContainer, { type: 'report' });
+
+
+    // Read embed application token from Model
+    const accessToken = "@Model.EmbedToken.Token";
+
+    // You can embed different reports as per your need by changing the index
+    // Read embed URL from Model
+    const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";
+
+
+    // Read report Id from Model
+    const embedReportId = "@Model.EmbedReports[0].ReportId";
+
+
+    // Use the token expiry to regenerate Embed token for seamless end user experience
+    // Refer https://aka.ms/RefreshEmbedToken
+    const tokenExpiry = "@Model.EmbedToken.Expiration";
+
+    // Get models. models contains enums that can be used.
+    const models = window['powerbi-client'].models;
+
+    // Embed configuration used to describe the what and how to embed.
+    // This object is used when calling powerbi.embed.
+    // This also includes settings and options such as filters.
+    // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+    const config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: accessToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: models.Permissions.All,
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: false,
+            navContentPaneEnabled: false
+        }
+    };
+
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+
+    var tagsInput, tagify, controller;
+    var selectedColumn = "Issuer_Name";
+    $(document).ready(function () {
+        tagsInput = document.getElementById('etf-issuer-tags');
+        tagify = new Tagify(tagsInput, {
+            whitelist: [],
+            enforceWhitelist: true
+        });
+        tagify.on('input', onInput);
+        tagsInput.addEventListener('change', onChange);
+    });
+
+    function onChange(e) {
+        console.log(e.target.value);
+        var tags = e.target.value;
+        if (tags != "") {
+            var tagsListArray = JSON.parse(e.target.value).map((i, e) => i.value);
+            var basicFilter = {
+                $schema: "http://powerbi.com/product/schema#basic",
+                target: {
+                    table: "Query1",
+                    column: selectedColumn
+                },
+                operator: 'In',
+                values: tagsListArray
+            };
+            report.setFilters([basicFilter]);
+        } else {
+            report.removeFilters();
+        }
+
+    }
+
+    function onInput(e) {
+        var value = e.detail.value
+        tagify.whitelist = null
+
+        controller && controller.abort()
+        controller = new AbortController()
+
+        tagify.loading(true).dropdown.hide()
+
+        var reqURL = '/API/v1/GetETF/?term=' + value;
+        if (selectedColumn == "Issuer_Name") {
+            reqURL += "&columnName=Issuer Name";
+        } else {
+            reqURL += "&columnName=Type";
+        }
+        fetch(reqURL, { signal: controller.signal })
+            .then(RES => RES.json())
+            .then(function (newWhitelist) {
+
+                tagify.whitelist = newWhitelist.map((i, e) => i.id);
+                tagify.loading(false).dropdown.show(value)
+            })
+    }
+
+    function setActivePage(pageId, ele) {
+        $(".btn-search-group .active").removeClass('active');
+        $(ele).addClass('active');
+        report.setPage(pageId);
+
+        if (pageId == "ReportSection") {
+            selectedColumn = "Issuer_Name";
+        } else {
+            selectedColumn = "Type";
+        }
+
+        tagify.removeAllTags();
+        report.removeFilters().then(function () {
+            console.log('filters removed')
+        });
+    }
+</script>

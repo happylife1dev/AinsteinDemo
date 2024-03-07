@@ -1,0 +1,235 @@
+﻿@*
+    ----------------------------------------------------------------------------
+    Copyright (c) Microsoft Corporation.
+    Licensed under the MIT license.
+    ----------------------------------------------------------------------------
+*@
+
+@model AinsteinDemo.Models.ReportEmbedConfig
+
+@{Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form action="javascript:void(0)">
+
+            <div class="form-group searchBar">
+                <input class="form-control" id="search_tags" placeholder="Enter Ticker Symbol, e.g., AAPL">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="row">
+                    <div class="col-12 menu-tab">
+                        <ul>
+                            <li>
+                                <a class="@(Model.BookmarkDisplayName == null ? "active" : "passive")" id="nav-earnings-tab" data-toggle="tab" href="/Company/Details/@Model.Ticker/"
+                                   aria-controls="nav-earnings" aria-selected="true" tabindex="0">
+                                    Snapshot
+                                </a>
+                            </li>
+                            <li>
+                                <a id="nav-industry2-tab" data-toggle="tab" href="/Company/ComingSoon/@Model.Ticker/"
+                                   aria-controls="nav-industry2" aria-selected="false" tabindex="-1">
+                                    Peer Comparison
+                                </a>
+                            </li>
+                            @*<li>
+                                <a class="@(Model.BookmarkDisplayName == "Cash Flow" ? "active" : "passive")" id="nav-earnings-tab" data-toggle="tab" href="/Company/CashFlow/@Model.Ticker/"
+                                   aria-controls="nav-earnings" aria-selected="true" tabindex="1">
+                                    Cash Flow
+                                </a>
+                            <li>
+                                <a class="@(Model.BookmarkDisplayName == "Revenue" ? "active" : "passive")" id="nav-earnings-tab" data-toggle="tab" href="/Company/Revenue/@Model.Ticker/"
+                                   aria-controls="nav-earnings" aria-selected="true" tabindex="2">
+                                    Revenue
+                                </a>
+                            </li>
+                            <li>
+                                <a class="@(Model.BookmarkDisplayName == "Earnings" ? "active" : "passive")" id="nav-earnings-tab" data-toggle="tab" href="/Company/Earnings/@Model.Ticker/"
+                                   aria-controls="nav-earnings" aria-selected="true" tabindex="3">
+                                    Earnings
+                                </a>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-4">
+
+                    <div id="embedContainer"></div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Bootstrap the embed container for report
+    powerbi.bootstrap(reportContainer, { type: 'report' });
+
+    // Read embed application token from Model
+    const accessToken = "@Model.EmbedToken.Token";
+
+    // You can embed different reports as per your need by changing the index
+    // Read embed URL from Model
+    const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";
+
+    // Read report Id from Model
+    const embedReportId = "@Model.EmbedReports[0].ReportId";
+
+    // Use the token expiry to regenerate Embed token for seamless end user experience
+    // Refer https://aka.ms/RefreshEmbedToken
+    const tokenExpiry = "@Model.EmbedToken.Expiration";
+
+    // Get models. models contains enums that can be used.
+    const models = window['powerbi-client'].models;
+
+    const bookmarkDisplayName = "@Model.BookmarkDisplayName";
+
+    // Embed configuration used to describe the what and how to embed.
+    // This object is used when calling powerbi.embed.
+    // This also includes settings and options such as filters.
+    // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+
+    var selectedCompanyName = "";
+    var defaultTicker = "";
+
+    switch('@Model.Ticker')  {
+        case "":
+            defaultTicker= "AAPL";
+            break;
+        case null:
+            defaultTicker = "AAPL";
+            break;
+        default:
+            defaultTicker = '@Model.Ticker';
+            break;
+    }
+
+    var FILTER_CONFIG = {
+        $schema: "http://powerbi.com/product/schema#basic",
+        target: {
+            table: "Tickers",
+            column: "EPD_Ticker"
+        },
+        operator: 'In',
+        values: [defaultTicker]
+    }
+
+    const config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: accessToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: models.Permissions.All,
+        // filters: [FILTER_CONFIG],
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: false,
+            navContentPaneEnabled: false
+        }
+    };
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+
+    report.on('loaded', function (event) {
+        report.setFilters([FILTER_CONFIG]);
+
+        if (bookmarkDisplayName) {
+            const bm = report.bookmarksManager
+            bm.config = report.config;
+            bm.getBookmarks().then(bookmarks => {
+                    bm.apply(bookmarks.find(bookmark => bookmark.displayName === bookmarkDisplayName).name || '')
+                });
+        }
+
+        var defaultVal = '@Model.Ticker';
+        if (defaultVal != "") {
+            $("#search_tags").val(defaultVal);
+            $.ajax({
+                method: "GET",
+                url: "/API/v1/GetCompany?term=" + defaultVal,
+                success: function (res) {
+                    console.log(res);
+                    if (typeof res != "undefined" && res != null &&  res != "") {
+                        var companyList = JSON.parse(res);
+                        if (companyList.length > 0 && companyList[0].id == defaultVal) {
+                            selectedCompanyName = companyList[0].label;
+                            $("#search_tags").val(selectedCompanyName);
+                        }
+                    }
+                }
+            })
+        }
+    });
+
+    $(document).ready(function (e) {
+        /*
+        $('#EarningsCoTags').inputTags({
+
+            tags: ['AAPL'],
+
+            change: function ($elem) {
+                var tagsListArray = $elem.tags;
+                if (tagsListArray.length == 0) return;
+                var basicFilter = {
+                    $schema: "http://powerbi.com/product/schema#basic",
+                    target: {
+                        table: "Tickers",
+                        column: "EPD_Ticker"
+                    },
+                    operator: 'In',
+                    values: tagsListArray
+                };
+                report.setFilters([basicFilter]);
+            }
+        });
+        */
+        $("#search_tags").autocomplete({
+            source: "/API/v1/GetCompany",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+                ui.item.value = ui.item.label;
+                selectedCompanyName = ui.item.value;
+                var basicFilter = {
+                    $schema: "http://powerbi.com/product/schema#basic",
+                    target: {
+                        table: "Tickers",
+                        column: "EPD_Ticker"
+                    },
+                    operator: 'In',
+                    values: [ui.item.id]
+                };
+                report.setFilters([basicFilter]);
+            }
+         });
+
+
+        $("#search_tags").on("focus", function () {
+            if ($(this).val() == selectedCompanyName) {
+                $(this).val('');
+            }
+         }).on("blur", function () {
+            if ($(this).val() == '') {
+                $(this).val(selectedCompanyName);
+            }
+         });
+    });
+</script>
+
+
+
+
+

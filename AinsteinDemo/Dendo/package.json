@@ -1,0 +1,14 @@
+{
+  "name": "@harrystevens/conditional-probability-as-a-tidy-tree",
+  "main": "2c840e9def44a379@388.js",
+  "version": "388.0.0",
+  "homepage": "https://observablehq.com/@harrystevens/conditional-probability-as-a-tidy-tree",
+  "author": {
+    "name": "Harry Stevens",
+    "url": "https://observablehq.com/@harrystevens"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

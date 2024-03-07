@@ -1,0 +1,124 @@
+﻿
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/style/ratings.css">
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form id="portfolioform">
+            <div class="form-group searchBar">
+                <input class="form-control" id="txtPortfolioInput" placeholder="Enter Portfolio(s)">
+                <button id="btnPortfolioInput" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="row">
+                <div class="col-12 menu-tab">
+                    <ul ul id="nav-tab" role="tablist">
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="true" tabindex="1">
+                                Cube
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="2">
+                                Snapshot
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="3">
+                                Engine
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="4">
+                                Facts
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="5">
+                                Viewer
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="6">
+                                Issuers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tooltip_container" style="width: 90%; position: absolute; left: 5em; z-index: 1; top: 8em;">
+                <div id="tooltip_container" class="tooltip-static-view"></div>
+                <div id="ratingsBar" class="ratingDetailBar">
+                    <div id="rrsHeading">
+                    </div>
+                    <div id="rrsSegments">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 text-center">
+                <div class="col-12 p-4" style="overflow-x: auto;">
+
+                    <iframe id="portcubeframe" src="/Portfolio/Testv1/QQQ"
+                            scrolling="no" style="overflow: visible;display: block;width: 100%;height: 750px;margin-top: 1em; min-width: 990px"
+                            frameborder="0"></iframe>
+
+                    <div class="tooltip-source-html">
+                        <div id="floating_vector">
+                            <div id="SecurityValues">
+                                <span id="lastPicked" style="display: none;"></span>
+                                <ul>
+                                    <li id="vecSym"></li>
+                                    <li id="vecRT"></li>
+                                    <li id="vecPE"></li>
+                                    <li id="vecEG"></li>
+                                    <li id="vecESG"></li>
+                                    <li id="vecTR"></li>
+                                    <li id="vecMCap"></li>
+                                </ul>
+                            </div>
+                        </div><!-- floating_vector -->
+                    </div><!-- tooltip-source-html -->
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script type="text/javascript" src="~/scripts/three.min.js"></script>
+<script type="text/javascript" src="~/scripts/OrbitControls.js"></script>
+<script type="text/javascript" src="~/scripts/tween.min.js"></script>
+<script type="text/javascript" src="~/scripts/d3.min.js"></script>
+<script type="text/javascript" src="~/scripts/tooltip.js"></script>
+<!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tooltip_ie.css" />
+<![endif]-->
+<script>
+    var url = "/API/v1/ETFCube/QQQ";
+</script>
+<script src="~/scripts/app.PortCubeETF.js"></script>
+<script>
+    $(document).ready(function (e) {
+        //$("#txtPortfolioInput").val('QQQ');
+        $("#txtPortfolioInput").autocomplete({
+            source: "/API/v1/GetETFPortfolioIds",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+                $('#portcubeframe').prop('src', '/Portfolio/Testv1/' + ui.item.value);
+            }
+        });
+    });
+</script>

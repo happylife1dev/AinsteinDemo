@@ -1,0 +1,109 @@
+﻿@model AinsteinDemo.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Content/style/account.css" rel="stylesheet" />
+    
+<main class="login">
+
+
+    <div class="login-section">
+
+
+        <div class="logo-container">
+            <a href="/Portfolio/Index" class="login-logo"><img src="~/Content/images/new-logo-bar.png" alt="" />Ainstein</a>
+        </div>
+
+
+        <div class="registration-body-wrapper">
+            <div class="justify-content-center">
+                <h1 class="section-title">Registration</h1>
+            </div>
+            <div class="justify-content-center">
+                <p class="page-sub-title">Use your preexisting third-party authentication, or create an account with Ainstein.</p>
+            </div>
+            <div class="content-wapper">
+
+                <div class="thirdparty-form-wrapper">
+                    <button class="btn third-party-button" type="button">
+                        <img src="/Content/images/logo-pershing.jpg" />
+                        <div class="button-text">Register with Pershing</div>
+                    </button>
+                </div>
+
+                <div class="line-wrapper">
+                    <div class="line-inner-wrapper">
+                        <div class="line">&nbsp;</div>
+                        <div class="word">
+                            OR
+                        </div>
+                        <div class="line">&nbsp;</div>
+                    </div>
+                </div>
+
+                <div class="email-form-wrapper">
+                    <form class="login-form">
+                        <div class="login-form-row wrapping-row">
+                            <div class="form-group person-name-wrapper">
+                                <div class="name-entry-wrapper">
+                                    <label for="firstnameid">First Name</label>
+                                    <input class="form-control form-field" id="firstnameid" placeholder="John">
+                                </div>
+                                <div class="name-entry-wrapper">
+                                    <label for="lastnameid">Last Name</label>
+                                    <input class="form-control form-field" id="lastnameid" placeholder="Brown">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login-form-row">
+                            <div class="form-group">
+                                <label for="emailid">Email</label>
+                                <input type="email" class="form-control form-field" id="emailid" placeholder="sample@microsoft.com">
+
+                            </div>
+                        </div>
+                        <div class="login-form-row">
+                            <div class="form-group" ">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control form-field" id="password" placeholder="enter password">
+                            </div>
+                        </div>
+                        <div class="login-form-row button-group">
+                            <div><button type="submit" class="btn btn-primary">Login</button></div>
+                            <div><button type="submit" class="btn">Cancel</button></div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="keepin">
+                                <label class="form-check-label" for="keepin">Keep me signed in</label>
+                            </div>
+                        </div>
+                        <div class="login-form-row forgot-password-wrapper">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="login-side-section">
+        <div class="signup-wrapper">
+            <h1 class="section-title">Go to Login</h1>
+            <p>
+                If you already have an Ainstein account, go to the login page.
+            </p>
+            <button class="btn btn-light" type="button">Go to Login</button>
+        </div>
+        <img src="~/Content/images/watermark-ainsteinai-logo-blue.png" alt="" />
+
+        <div class="row d-flex fixed-bottom flex-column ">
+            <p class="copyright-footer">Copyright 2023  StockSmart Inc.</p>
+        </div>
+    </div>
+
+
+
+</main>

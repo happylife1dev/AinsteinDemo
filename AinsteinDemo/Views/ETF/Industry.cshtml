@@ -1,0 +1,234 @@
+﻿@*
+    ----------------------------------------------------------------------------
+    Copyright (c) Microsoft Corporation.
+    Licensed under the MIT license.
+    ----------------------------------------------------------------------------
+*@
+
+@model AinsteinDemo.Models.ReportEmbedConfig
+
+@{ ViewBag.Title = "Industry";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+
+        <div class="form-group searchBar">
+            <input class="form-control" type="text" id="EarningsCoTags" />
+        </div>
+        <!-- <div class="theme-ai-tagsinput">
+            <input type="text" id="etf-tags" />
+        </div>
+
+        <div class="form-group searchBar">
+            <input class="form-control" id="EarningsCo" placeholder="Enter ETF Symbol, e.g., SPY">
+            <button type="submit" ><i class="fas fa-search"></i></button>
+        </div> -->
+
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="row">
+                <div class="col-12 menu-tab">
+                    <ul id="nav-tab" role="tablist">
+                        <li>
+                            <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="-1">
+                                Constituents Cube
+                            </a>
+                        </li>
+                        <li>
+                            <a class="active" id="nav-industry-tab" data-toggle="tab" href="/ETF/Industry/0"
+                               aria-controls="nav-industry" aria-selected="true" tabindex="0">
+                                ETF Tracker
+
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-issuer-tab" data-toggle="tab" href="/ETF/Issuer/1"
+                               aria-controls="nav-issuer" aria-selected="false" tabindex="-1">
+                                ETF Issuer
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 p-4">
+                <div id="embedContainer"></div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Bootstrap the embed container for report
+    powerbi.bootstrap(reportContainer, { type: 'report' });
+
+    // Read embed application token from Model
+    const accessToken = "@Model.EmbedToken.Token";
+
+    // You can embed different reports as per your need by changing the index
+    // Read embed URL from Model
+    const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";
+
+    // Read report Id from Model
+    const embedReportId = "@Model.EmbedReports[0].ReportId";
+
+    // Use the token expiry to regenerate Embed token for seamless end user experience
+    // Refer https://aka.ms/RefreshEmbedToken
+    const tokenExpiry = "@Model.EmbedToken.Expiration";
+
+    // Get models. models contains enums that can be used.
+    const models = window['powerbi-client'].models;
+
+    // Embed configuration used to describe the what and how to embed.
+    // This object is used when calling powerbi.embed.
+    // This also includes settings and options such as filters.
+    // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+
+
+  @*  var filterVal = "@Model.FilterValue"
+    alert("loading" + filterVal)*@
+
+    @*const filter = {
+        $schema: "http://powerbi.com/product/schema#basic",
+        target: {
+            table: "Details",
+            column: "FundTicker"
+        },
+        operator: "In",
+        values: ["SPY"]
+    };
+*@
+    /*
+    async function filterResults() {
+        var val = document.getElementById("EarningsCo").value;
+        if (val == "") {
+            val="SPY"
+        }
+        var basicFilter = {
+            $schema: "http://powerbi.com/product/schema#basic",
+            target: {
+                table: "Details",
+                column: "FundTicker"
+            },
+            operator: 'In',
+            values: [val]
+        };
+        report.setFilters([basicFilter]);
+        return false;
+    }
+
+    */
+
+    var defaultTicker = "";
+
+    switch('@Model.Ticker')  {
+        case "":
+            defaultTicker= "SPY";
+            break;
+        case null:
+            defaultTicker = "SPY";
+            break;
+        default:
+            defaultTicker = '@Model.Ticker';
+            break;
+    }
+
+    var FILTER_CONFIG = {
+        $schema: "http://powerbi.com/product/schema#basic",
+        target: {
+            table: "Details",
+            column: "FundTicker"
+        },
+        operator: 'In',
+        values: ['SPY']
+    }
+
+    const config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: accessToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: models.Permissions.All,
+        filters: [FILTER_CONFIG],
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: false,
+            navContentPaneEnabled: false
+        },
+
+       @* filters: [filter]*@
+    };
+
+    const report = powerbi.embed(reportContainer, config);
+
+
+    var tagsInput, tagify, controller;
+    $(document).ready(function () {
+        tagsInput = document.getElementById('EarningsCoTags');
+        tagify = new Tagify(tagsInput, {
+            whitelist: ['SPY'],
+            enforceWhitelist: true
+        });
+        tagify.addTags("SPY");
+        tagify.on('input', onInput);
+        tagsInput.addEventListener('change', onChange);
+    });
+
+    function onChange(e) {
+        console.log(e.target.value);
+        var tags = e.target.value;
+        if (tags != "") {
+            var tagsListArray = JSON.parse(e.target.value).map((i, e) => i.value);
+            var basicFilter = {
+                $schema: "http://powerbi.com/product/schema#basic",
+                target: {
+                    table: "Details",
+                    column: "FundTicker"
+                },
+                operator: 'In',
+                values: tagsListArray
+            };
+            report.setFilters([basicFilter]);
+        }
+
+    }
+
+    function onInput(e) {
+        var value = e.detail.value
+        tagify.whitelist = null
+
+        controller && controller.abort()
+        controller = new AbortController()
+
+        tagify.loading(true).dropdown.hide()
+
+        fetch('/API/v1/GetETF/?term=' + value + '&columnName=ETF_Symbol', { signal: controller.signal })
+            .then(RES => RES.json())
+            .then(function (newWhitelist) {
+
+                tagify.whitelist = newWhitelist.map((i, e) =>  i.id);
+                tagify.loading(false).dropdown.show(value)
+            })
+    }
+</script>
+
+
+
+
+
+
+
+

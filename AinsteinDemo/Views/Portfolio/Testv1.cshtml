@@ -1,0 +1,84 @@
+﻿<!-- @model AinsteinDemo.Models.Cube
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <main role="main">
+        <div>
+            <div id="poweredby" class="fadeBtn">
+                <div class="tg-button tg-r">
+                    <input class="fadeBtn tg-layer tg-layer2-on" type="button" value="Align">
+                    <input type="button" class="tg-layer tg-layer2-on align" onclick="javascript:expandData()" value="Align" />
+                </div>
+                <div class="tg-button tg-r" id="tg-button-1">
+                    <input type="checkbox" class="tg-checkbox" onclick="javascript:toggle3d()" />
+                    <div class="tg-knobs"></div>
+                    <div class="tg-layer"></div>
+                </div>
+            </div>
+            <form>
+                <div id="v-pills-tabContent">
+                    <div>
+                        <div class="col-12 p-4">
+
+                            <div id="tooltip_container"></div>
+
+                            <div id="canvas" class="canvas"></div>
+
+                            <div class="tooltip-source-html">
+                                <div id="floating_vector">
+                                    <div id="SecurityValues" class="tool-tip-title">
+                                        <span id="lastPicked" style="display: none;"></span>
+                                        <ul>
+                                            <li id="vecSym"></li>
+                                            <li id="vecRT"></li>
+                                            <li id="vecPE"></li>
+                                            <li id="vecEG"></li>
+                                            <li id="vecESG"></li>
+                                            <li id="vecTR"></li>
+                                            <li id="vecMCap"></li>
+                                        </ul>
+                                    </div>
+                                    <iframe name="vector" id="vector" class="vector-container" src="" scrolling="no" frameborder="0" style=""></iframe>
+                                </div><!-- floating_vector -->
+                            </div><!-- tooltip-source-html -->
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+<script type="text/javascript" src="~/scripts/three.min.js"></script>
+<script type="text/javascript" src="~/scripts/OrbitControls.js"></script>
+<script type="text/javascript" src="~/scripts/tween.min.js"></script>
+<script type="text/javascript" src="~/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="~/scripts/d3.min.js"></script>
+<!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tooltip_ie.css" />
+<![endif]-->
+<script>
+    var url = "/API/v1/ETFCube/" + "@Model.portfolioID";
+    console.log(url);
+</script>
+<script src="~/scripts/app.PortCubeETF.js"></script>
+<script>
+    $('html').css('background-color', "transarent");
+
+    $(document).ready(function () {
+        $(".canvas")
+            .removeClass("fadeIn")
+            .delay(1000)
+            .queue(function () {
+                $(this)
+                    .addClass("fadeIn")
+                    .dequeue();
+            });
+    });
+</script> -->

@@ -1,0 +1,173 @@
+{"name": "PowerShares QQQ", "children": [
+  {"name": "Technology", "size": 45, "children": [
+    {"name": "Technology", "size": 42, "children": [
+      {"name": "Internet Products & Services", "size": 16, "children": [
+        {"name": "(AMZN) AMAZON.COM", "size": 5, "color": "#A2CB47"},
+        {"name": "(GOOG) GOOGLE INC", "size": 4, "color": "#53BB6A"},
+        {"name": "(FB) FACEBOOK INC", "size": 4, "color": "#A2CB47"},
+        {"name": "(BIDU) BAIDU", "size": 0.9, "color": "#53BB6A"},
+        {"name": "(YHOO) YAHOO INC", "size": 0.7, "color": "#A2CB47"},
+        {"name": "(EBAY) EBAY INC", "size": 0.7, "color": "#A2CB47"},
+        {"name": "(AKAM) AKAMAI TECHNOLOGIES", "size": 0.3, "color": "#A2CB47"} ] } ,
+      {"name": "Computers", "size": 13, "children": [
+        {"name": "(AAPL) APPLE INC", "size": 13, "color": "#A2CB47"} ] } ,
+      {"name": "Software & Services", "size": 10, "children": [
+        {"name": "(MSFT) MICROSOFT CORP", "size": 7, "color": "#A2CB47"},
+        {"name": "(ADBE) ADOBE SYSTEMS INC", "size": 0.8, "color": "#A2CB47"},
+        {"name": "(INTU) INTUIT INC", "size": 0.6, "color": "#F1DB24"},
+        {"name": "(SYMC) SYMANTEC", "size": 0.3, "color": "#A2CB47"},
+        {"name": "(CHKP) CHECK POINT SOFTWARE", "size": 0.3, "color": "#A2CB47"},
+        {"name": "(CA) CA", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(CTXS) CITRIX SYSTEMS", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(ADSK) AUTODESK", "size": 0.2, "color": "#A2CB47"} ] } ,
+      {"name": "Networking", "size": 3, "children": [
+        {"name": "(CSCO) CISCO SYSTEMS INC", "size": 3, "color": "#A2CB47"} ] } ,
+      {"name": "Computer Peripherals ", "size": 0.9, "children": [
+        {"name": "(WDC) WESTERN DIGITAL", "size": 0.4, "color": "#A2CB47"},
+        {"name": "(STX) SEAGATE TECH", "size": 0.3, "color": "#A2CB47"},
+        {"name": "(NTAP) NETAPP", "size": 0.2, "color": "#A2CB47"} ] }  ] }
+    ,
+    {"name": "Telecom", "size": 3, "children": [
+      {"name": "Cellular & Telephone Services", "size": 3, "children": [
+        {"name": "(QCOM) QUALCOMM INC", "size": 2, "color": "#A2CB47"},
+        {"name": "(VOD) VODAFONE GROUP PLC", "size": 0.3, "color": "lightsteelblue"},
+        {"name": "(SBAC) SBA COMMUNICATIONS", "size": 0.3, "color": "#F1DB24"},
+        {"name": "(VIP) VIMPELCOM", "size": 0.2, "color": "#A2CB47"} ] } ,
+      {"name": "Communications Equipment", "size": 0.1, "children": [
+        {"name": "(GRMN) GARMIN", "size": 0.1, "color": "#A2CB47"} ] }  ] }
+   ] },
+  {"name": "Consumer Non Cyclical", "size": 22, "children": [
+    {"name": "Health", "size": 14, "children": [
+      {"name": "Biomedics", "size": 11, "children": [
+        {"name": "(GILD) GILEAD SCIENCES", "size": 3, "color": "#A2CB47"},
+        {"name": "(AMGN) AMGEN INC", "size": 2, "color": "#A2CB47"},
+        {"name": "(BIIB) BIOGEN IDEC", "size": 1, "color": "#A2CB47"},
+        {"name": "(REGN) REGENERON PHARMACEUTICALS", "size": 1, "color": "#A2CB47"},
+        {"name": "(ALXN) ALEXION PHARMACEUTICALS", "size": 0.8, "color": "#A2CB47"},
+        {"name": "(VRTX) VERTEX", "size": 0.7, "color": "#F1DB24"},
+        {"name": "(ILMN) ILLUMINA", "size": 0.6, "color": "#A2CB47"},
+        {"name": "(BMRN) BIOMARIN PHARMACEUTICALS", "size": 0.4, "color": "#F1DB24"} ] } ,
+      {"name": "Drugs", "size": 2, "children": [
+        {"name": "(CELG) CELGENE CORPORATION", "size": 2, "color": "#A2CB47"},
+        {"name": "(MYL) MYLAN", "size": 0.5, "color": "#A2CB47"} ] } ,
+      {"name": "Medical Equipment", "size": 0.4, "children": [
+        {"name": "(ISRG) INTUITIVE SURGICAL", "size": 0.4, "color": "#A2CB47"} ] } ,
+      {"name": "Medical Products", "size": 0.2, "children": [
+        {"name": "(HSIC) HENRY SCHEIN", "size": 0.2, "color": "#A2CB47"} ] }  ] }
+    ,
+    {"name": "Food & Beverage", "size": 4, "children": [
+      {"name": "Restaurants", "size": 2, "children": [
+        {"name": "(SBUX) STARBUCKS", "size": 2, "color": "#A2CB47"} ] } ,
+      {"name": "Food", "size": 1, "children": [
+        {"name": "(MDLZ) MONDELEZ INTERNATIONAL", "size": 1, "color": "#F1DB24"} ] } ,
+      {"name": "Beverages", "size": 0.6, "children": [
+        {"name": "(MNST) MONSTER BEVERAGE CORP", "size": 0.6, "color": "#A2CB47"} ] } ,
+      {"name": "Grocery", "size": 0.2, "children": [
+        {"name": "(WFM) WHOLE FOODS MARKET INC", "size": 0.2, "color": "#F1DB24"} ] } ,
+      {"name": "Agriculture & Commodity Foods", "size": 0.2, "children": [
+        {"name": "(GMCR) GREEN MNTN COFFEE ROASTER", "size": 0.2, "color": "#A2CB47"} ] }  ] }
+    ,
+    {"name": "Services", "size": 3, "children": [
+      {"name": "Data Processing", "size": 2, "children": [
+        {"name": "(CTSH) COGNIZANT TECH SOLUTION", "size": 0.8, "color": "#A2CB47"},
+        {"name": "(ADP) AUTOMATIC DATA PROCESSING", "size": 0.7, "color": "#F1DB24"},
+        {"name": "(CERN) CERNER", "size": 0.4, "color": "#A2CB47"},
+        {"name": "(FISV) FISERV", "size": 0.4, "color": "#A2CB47"} ] } ,
+      {"name": "Staffing", "size": 0.3, "children": [
+        {"name": "(PAYX) PAYCHEX", "size": 0.3, "color": "#A2CB47"} ] }  ] }
+    ,
+    {"name": "Consumer Products & Services", "size": 1, "children": [
+      {"name": "Toys", "size": 1, "children": [
+        {"name": "(EA) ELECTRONIC ARTS INC", "size": 0.4, "color": "#F1DB24"},
+        {"name": "(ATVI) ACTIVISION BLIZZARD INC", "size": 0.4, "color": "#F1DB24"},
+        {"name": "(MAT) MATTEL", "size": 0.1, "color": "#F1DB24"} ] }  ] }
+   ] },
+  {"name": "Consumer Cyclical", "size": 13, "children": [
+    {"name": "Media", "size": 7, "children": [
+      {"name": "Broadcasting - TV & Radio", "size": 4, "children": [
+        {"name": "(CMCSA) COMCAST CORPORATION", "size": 2, "color": "#A2CB47"},
+        {"name": "(CMCSK) COMCAST CORPORATION", "size": 0.4, "color": "#A2CB47"},
+        {"name": "(SIRI) SIRIUS SATELLITE RADIO", "size": 0.4, "color": "#F1DB24"},
+        {"name": "(CHTR) CHARTER COMMUNICATIONS INC", "size": 0.4, "color": "#F1DB24"},
+        {"name": "(DISH) DISH NETWORK CORP", "size": 0.3, "color": "#A2CB47"} ] } ,
+      {"name": "Diversified Media", "size": 2, "children": [
+        {"name": "(LBTYK) LIBERTY GLOBAL", "size": 0.6, "color": "lightsteelblue"},
+        {"name": "(VIAB) VIACOM INC CL B", "size": 0.3, "color": "lightsteelblue"},
+        {"name": "(LBTYA) LIBERTY GLOBAL", "size": 0.3, "color": "#F1DB24"},
+        {"name": "(DISCK) DISCOVERY COMMUNICATIONS", "size": 0.1, "color": "lightsteelblue"},
+        {"name": "(LVNTA) LIBERTY VENTURES", "size": 0.1, "color": "lightsteelblue"},
+        {"name": "(DISCA) DISCOVERY COMMUNICATIONS", "size": 0.1, "color": "#F1DB24"},
+        {"name": "(LMCA) LIBERTY MEDIA CORP - LIBERTY CAPITAL", "size": 0.1, "color": "#A2CB47"} ] } ,
+      {"name": "Movies", "size": 1, "children": [
+        {"name": "(NFLX) NETFLIX INC", "size": 1, "color": "#F1DB24"} ] }  ] }
+    ,
+    {"name": "Retailers", "size": 3, "children": [
+      {"name": "Department Stores", "size": 1, "children": [
+        {"name": "(COST) COSTCO WHOLESALE", "size": 1, "color": "#A2CB47"} ] } ,
+      {"name": "Discount & Variety Stores", "size": 0.8, "children": [
+        {"name": "(ROST) ROSS STORES", "size": 0.4, "color": "#A2CB47"},
+        {"name": "(DLTR) DOLLAR TREE STORES", "size": 0.3, "color": "#F1DB24"} ] } ,
+      {"name": "C-Stores & Auto-Related Retailers", "size": 0.5, "children": [
+        {"name": "(ORLY) O'REILLY AUTOMOTIVE", "size": 0.5, "color": "#A2CB47"} ] } ,
+      {"name": "Home Improvement & Hardware", "size": 0.2, "children": [
+        {"name": "(TSCO) TRACTOR SUPPLY", "size": 0.2, "color": "#F1DB24"} ] } ,
+      {"name": "Specialty Retailers", "size": 0.2, "children": [
+        {"name": "(BBBY) BED BATH & BEYOND", "size": 0.2, "color": "#A2CB47"} ] } ,
+      {"name": "Office Products", "size": 0.2, "children": [
+        {"name": "(SPLS) STAPLES", "size": 0.2, "color": "#F1DB24"} ] }  ] }
+    ,
+    {"name": "Travel & Transportation", "size": 2, "children": [
+      {"name": "Travel Services", "size": 2, "children": [
+        {"name": "(PCLN) PRICELINE.COM INC", "size": 1, "color": "#A2CB47"},
+        {"name": "(TRIP) TRIPADVISOR INC", "size": 0.2, "color": "#A2CB47"} ] } ,
+      {"name": "Hotels & Resorts", "size": 0.4, "children": [
+        {"name": "(MAR) MARRIOT INTL", "size": 0.4, "color": "#F1DB24"} ] } ,
+      {"name": "Trucking", "size": 0.2, "children": [
+        {"name": "(CHRW) CH ROBINSON WORLDWIDE", "size": 0.2, "color": "#A2CB47"} ] } ,
+      {"name": "Air Freight", "size": 0.2, "children": [
+        {"name": "(EXPD) EXPEDITORS INTL", "size": 0.2, "color": "#F1DB24"} ] }  ] }
+    ,
+    {"name": "Auto", "size": 1, "children": [
+      {"name": "Auto Manufacturers", "size": 0.6, "children": [
+        {"name": "(TSLA) TESLA MOTORS INC", "size": 0.6, "color": "#F1DB24"} ] } ,
+      {"name": "Auto Parts", "size": 0.4, "children": [
+        {"name": "(PCAR) PACCAR", "size": 0.4, "color": "#A2CB47"} ] }  ] }
+    ,
+    {"name": "Gambling", "size": 0.2, "children": [
+      {"name": "Gambling", "size": 0.2, "children": [
+        {"name": "(WYNN) WYNN RESORTS", "size": 0.2, "color": "#A2CB47"} ] }  ] }
+   ] },
+  {"name": "Industrial", "size": 8, "children": [
+    {"name": "Electronics", "size": 8, "children": [
+      {"name": "Semiconductors ", "size": 8, "children": [
+        {"name": "(INTC) INTEL CORP", "size": 3, "color": "#A2CB47"},
+        {"name": "(TXN) TEXAS INSTRUMENTS INC", "size": 1, "color": "#A2CB47"},
+        {"name": "(AVGO) AVAGO TECHNOLOGIES", "size": 0.6, "color": "#A2CB47"},
+        {"name": "(BRCM) BROADCOM CORPORATION", "size": 0.5, "color": "#A2CB47"},
+        {"name": "(NXPI) NXP SEMICONDUCTOR", "size": 0.5, "color": "#A2CB47"},
+        {"name": "(AMAT) APPLIED MATERIALS INC", "size": 0.4, "color": "#A2CB47"},
+        {"name": "(MU) MICRON TECH", "size": 0.4, "color": "#F1DB24"},
+        {"name": "(ADI) ANALOG DEVICES", "size": 0.4, "color": "#A2CB47"},
+        {"name": "(SWKS) SKYWORKS SOLUTIONS", "size": 0.3, "color": "#A2CB47"},
+        {"name": "(ALTR) ALTERA", "size": 0.3, "color": "#A2CB47"},
+        {"name": "(SNDK) SANDISK", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(LRCX) LAM RESEARCH", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(XLNX) XILINX", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(NVDA) NVIDIA", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(LLTC) LINEAR TECH", "size": 0.2, "color": "#A2CB47"},
+        {"name": "(KLAC) KLA-TENCOR", "size": 0.2, "color": "#A2CB47"} ] }  ] }
+   ] },
+  {"name": "Finance", "size": 1, "children": [
+    {"name": "Insurance", "size": 1, "children": [
+      {"name": "Insurance", "size": 1, "children": [
+        {"name": "(ESRX) EXPRESS SCRIPTS INC", "size": 1, "color": "#A2CB47"},
+        {"name": "(VRSK) VERISK ANALYTICS", "size": 0.2, "color": "#F1DB24"} ] }  ] }
+   ] },
+  {"name": "Basic Materials", "size": 0.5, "children": [
+    {"name": "Materials & Construction", "size": 0.5, "children": [
+      {"name": "Waste Management", "size": 0.2, "children": [
+        {"name": "(SRCL) STERICYCLE", "size": 0.2, "color": "#A2CB47"} ] } ,
+      {"name": "Building Materials", "size": 0.2, "children": [
+        {"name": "(FAST) FASTENAL", "size": 0.2, "color": "#A2CB47"} ] }  ] }
+   ] }
+ ] }

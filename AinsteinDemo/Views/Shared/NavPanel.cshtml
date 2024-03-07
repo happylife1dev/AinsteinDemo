@@ -1,0 +1,242 @@
+﻿
+<nav class="nav nav-bar-wrapper" id="sidebar" role="tablist" aria-orientation="vertical">
+    <div class="nav-logo-container">
+        <a href="/Portfolio/Index" class="nav-logo">
+            <img src="~/Content/images/new-logo-bar.png" alt="" />
+            <div class="company-name">Ainstein</div>
+        </a>
+
+        <div class="form-group searchBar">
+            <div class="search-field-wrapper">
+                <input class="form-control" id="txtPortfolioInput" placeholder="@(ViewContext.RouteData.Values["Controller"].ToString() == "ETF" ? "Enter ETF symbol eg. VUG": "Enter ticker symbol eg. AAPL")">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+
+        <div class="bottom-nav-pills">
+            <a class="gray pill header-icon" id="pc-pills-settings-tab"
+               href="#"
+               aria-controls="v-pills-settings" aria-selected="false">
+                <i class="fas fa-cog top-icon"></i>
+                <p class="tablist-title">Settings</p>
+            </a>
+            <a class="gray pill header-icon" id="pc-pills-notifications-tab"
+               href="#"
+               aria-controls="v-pills-notifications" aria-selected="false">
+                <i class="far fa-bell top-icon"></i>
+                <p class="tablist-title">Notifications</p>
+            </a>
+            <a class="gray pill header-icon" id="pc-pills-account-tab"
+               href="#"
+               aria-controls="v-pills-account" aria-selected="false">
+                <i class="far fa-user-circle top-icon"></i>
+                <p class="tablist-title tablist-title-top">Account</p>
+            </a>
+            <a href="/Account/Register"
+               class="gray pill header-icon registration-button-wrapper" id="pc-pills-account-tab">
+                <input type="button" class="btn-register" value="Sign Up">
+                <!--p class="tablist-title">Click to sign up!</p-->
+            </a>
+        </div>
+    </div>
+
+    <div class="flex-column nav-pills">
+        <span>
+            <a class="purple pill @(ViewContext.RouteData.Values["Controller"].ToString() == "Portfolio" ? "active": "")" id="pc-pills-healthy-portfolio-tab"
+               href="/Portfolio/Index"
+               data-sectionref="portfoliocube" data-sectionarg="portfoliocube"
+               aria-controls="pc-pills-healthy-portfolio" aria-selected="true">
+                <i class="fas fa-cube purple-icon icon"></i>
+                <p class="tablist-title">Portfolio Tracker</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="red pill  @(ViewContext.RouteData.Values["Controller"].ToString() == "Company" ? "active": "")" id="pc-pills-company-snapshot-tab"
+               href="/Company/Details/AAPL"
+               data-sectionref="companysnapshottracker" data-sectionarg="companysnapshottracker"
+               aria-controls="v-pills-company-snapshot" aria-selected="false">
+                <i class="fas fa-camera red-icon icon"></i>
+                <p class="tablist-title">Company Snapshot</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="green pill @(ViewContext.RouteData.Values["Controller"].ToString() == "Newearnings" ? "active": "")" id="pc-pills-newearnings-tab"
+               href="/Newearnings/Newearnings/0"
+               @* data-sectionref="earningstracker" data-sectionarg="earningstracker"*@
+               aria-controls="v-pills-newearnings" aria-selected="false">
+                <i class="fas fa-calculator green-icon icon"></i>
+                <p class="tablist-title">Earnings Engine</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="yellow pill @(ViewContext.RouteData.Values["Controller"].ToString() == "ETF" ? "active": "")" id="pc-pills-etfs-tab"
+               href="/ETF/Constituents/1"
+               data-sectionref="etftracker" data-sectionarg="etftracker"
+               aria-controls="v-pills-etfs" aria-selected="false">
+                <i class="fas fa-coins yellow-icon icon"></i>
+                <p class="tablist-title">ETFs</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="green pill" id="pc-pills-industry-tracker-tab"
+               href="#"
+               aria-controls="pc-pills-industry-tracker" aria-selected="false">
+                <i class="fas fa-briefcase green-icon icon"></i>
+                <p class="tablist-title">Industries</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="blue pill @(ViewContext.RouteData.Values["Controller"].ToString() == "Exchange" ? "active": "")" id="pc-pills-exchange-tracker-tab"
+               href="/Exchange/Australia/0"
+               aria-controls="v-pills-exchange-tracker" aria-selected="false">
+                <i class="fas fa-globe purple-icon icon"></i>
+                <p class="tablist-title">Exchanges</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="blue pill" id="pc-pills-model-forecast-tab"
+               href="#"
+               aria-controls="v-pills-model-forecast" aria-selected="false">
+                <i class="fas fa-chart-line blue-icon icon"></i>
+                <p class="tablist-title">Forecasts</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="purple pill @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active": "")" id="pc-pills-market-tracker-tab"
+               href="/Home/EmbedReport/1"
+               aria-controls="v-pills-market-tracker" aria-selected="false">
+                <i class="fas fa-globe-americas red-icon icon"></i>
+                <p class="tablist-title">Markets</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+
+            <a class="purple pill" id="pc-pills-smart-news-tab"
+               href="#"
+               aria-controls="v-pills-smart-news" aria-selected="false">
+                <i class="fas fa-newspaper purple-icon icon"></i>
+                <p class="tablist-title">SMART News</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="blue pill" id="pc-pills-mutual-funds-tab"
+               href="#"
+               aria-controls="v-pills-mutual-funds" aria-selected="false">
+                <i class="fas fa-hand-holding-usd blue-icon icon"></i>
+                <p class="tablist-title">Mutual Funds</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="green pill" id="pc-pills-esg-tab"
+               href="#"
+               aria-controls="v-pills-esg" aria-selected="false">
+                <i class="fas fa-leaf green-icon icon"></i>
+                <p class="tablist-title">ESG</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+            <a class="yellow pill" id="pc-pills-bond-tab"
+               href="#"
+               aria-controls="v-pills-bond" aria-selected="false">
+                <i class="fas fa-file-certificate yellow-icon icon"></i>
+                <p class="tablist-title">Bonds</p>
+                <i class="fas fa-angle-right active-indicator"></i>
+            </a>
+        </span>
+    </div>
+</nav>
+
+<script>
+    $(".hide-icons").click(function () {
+        $(".toggle-arrow").toggleClass("fa-chevron-down fa-chevron-up")
+        $(".hidden-icons").toggleClass("span-hide-icons span-show-icons")
+        $(".tablist-title").toggleClass("tablist-title-more tablist-title-less")
+    });
+
+    $("#txtPortfolioInput").typeahead({
+        minLength: 3,
+        // Uncomment following line to get the group headings cum dividers in search results 
+        //separator: "SecurityCode",
+        source: function (request, response) {
+            $.ajax({
+                url: "/API/v1/GetSearchResultsUsingDB/",
+                data: {
+                    "searchText": request
+                },
+                type: "GET",
+                contentType: "json",
+                success: function (data) {
+                    items = [];
+                    map = {};
+                    $.each(data, function (i, item) {
+                        map[item.Name] = {
+                            //    value: [item.Id, item.Name].join(', '),
+                            id: item.Id,
+                            name: item.Name
+                        };
+                        items.push({
+                            id: item.Id,
+                            name: item.Name,
+                            SecurityCode: item.SecurityCode,
+                            showCategoryHeader: true
+                        });
+                    });
+                    response(items);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+
+        //templates: {
+        //    suggestion: function (data) {
+        //        if (data.isDivider) {
+        //            return '<div class="typeahead-divider"></div>';
+        //        } else {
+        //            return '<div>' + data.value + '</div>';
+        //        }
+        //    }
+        //},
+
+        //updater: function (item) {
+        //    //If simultaneously want to update value somewhere else $("#searchResults").val(map[item].id);
+        //    return item;
+        //},
+
+        afterSelect: function (item) {
+            $.ajax({
+                url: "/API/v1/GetCompanyRiskRatings/",
+                data: {
+                    "tickerSymbol": item.id
+                },
+                type: "GET",
+                contentType: "json",
+                success: function (data) {
+                    window.parent.parent.document.getElementById("ribbon-title").innerHTML = data.CompanyName;
+                    window.parent.parent.document.getElementById("ribbon-title").innerHTML = data.CompanyName;
+                    window.parent.parent.document.getElementById("ribbon-ainstein-rating").innerHTML = data.AinsteinRating;
+                    changeRibbonRatingStyle("ribbon-ainstein-rating", data.AinsteinRating);
+                    window.parent.parent.document.getElementById("ribbon-sector").innerHTML = data.Sector;
+                    window.parent.parent.document.getElementById("ribbon-industry").innerHTML = data.Industry;
+                    window.parent.parent.document.getElementById("ribbon-subindustry").innerHTML = data.SubIndustry;
+                    window.parent.parent.document.getElementById("ribbon-ESG").innerHTML = data.ESG;
+                    changeRibbonRatingStyle("ribbon-ESG", data.ESG);
+                    window.parent.parent.document.getElementById("ribbon-subindustry-rating").innerHTML = data.SubIndustryRating;
+                    changeRibbonRatingStyle("ribbon-subindustry-rating", data.SubIndustryRating);
+                    window.parent.parent.document.getElementById("ribbon-industry-rating").innerHTML = data.IndustryRating;
+                    changeRibbonRatingStyle("ribbon-industry-rating", data.IndustryRating);
+                    window.parent.parent.document.getElementById("ribbon-sector-rating").innerHTML = data.SectorRating;
+                    changeRibbonRatingStyle("ribbon-sector-rating", data.SectorRating);
+                    window.parent.parent.document.getElementById("ribbon-performance-rating").innerHTML = data.PerformanceRating;
+                    changeRibbonRatingStyle("ribbon-performance-rating", data.PerformanceRating);
+                    window.parent.parent.document.getElementById("ribbon-value-rating").innerHTML = data.ValueRating;
+                    changeRibbonRatingStyle("ribbon-value-rating", data.ValueRating);
+                    window.parent.parent.document.getElementById("ribbon-earnings").innerHTML = data.EarningsRating;
+                    changeRibbonRatingStyle("ribbon-earnings", data.EarningsRating);
+                    window.parent.parent.document.getElementById("ribbon-revenue").innerHTML = data.RevenueRating;
+                    changeRibbonRatingStyle("ribbon-revenue", data.RevenueRating);
+                    window.parent.parent.document.getElementById("ribbon-cashflow").innerHTML = data.CashFlowRating;
+                    changeRibbonRatingStyle("ribbon-cashflow", data.CashFlowRating);
+                    window.parent.parent.document.getElementById("ribbon-margin").innerHTML = data.MarginRating;
+                    changeRibbonRatingStyle("ribbon-margin", data.MarginRating);
+                    window.parent.parent.document.getElementById("ribbon-earnings-growth-rating").innerHTML = data.GrowthRating;
+                    changeRibbonRatingStyle("ribbon-earnings-growth-rating", data.GrowthRating);
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/style/account.css" rel="stylesheet" />
+
+<main class="login">
+    
+
+    <div class="login-section">
+
+
+        <div class="logo-container">
+            <a href="/Portfolio/Index" class="login-logo"><img src="~/Content/images/new-logo-bar.png" alt="" />Ainstein</a>
+        </div>
+
+
+        <div class="login-body-wrapper">
+            <div class="justify-content-center">
+                <h1 class="section-title">Account Login</h1>
+            </div>
+            <div class="justify-content-center">
+                <p class="page-sub-title">Use your email credentials or a third party application.</p>
+            </div>
+            <div class="content-wapper">
+
+                <div class="thirdparty-form-wrapper">
+                    <button class="btn third-party-button" type="button">
+                        <img src="/Content/images/logo-pershing.jpg" />
+                        <div class="button-text">Pershing Login</div>
+                    </button>
+                </div>
+
+                <div class="line-wrapper">
+                    <div class="line-inner-wrapper">
+                        <div class="line">&nbsp;</div>
+                        <div class="word">
+                            OR
+                        </div>
+                        <div class="line">&nbsp;</div>
+                    </div>
+                </div>
+
+                <div class="email-form-wrapper">
+                    <form class="login-form">
+                        <div class="login-form-row">
+                            <div class="form-group">
+                                <label for="emailid">Email</label>
+                                <input type="email" class="form-control form-field" id="emailid" placeholder="sample@microsoft.com">
+
+                            </div>
+                        </div>
+                        <div class="login-form-row">
+                            <div class="form-group" ">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control form-field" id="password" placeholder="enter password">
+                            </div>
+                        </div>
+                        <div class="login-form-row button-group">
+                            <div><button type="submit" class="btn btn-primary">Login</button></div>
+                            <div><button type="submit" class="btn">Cancel</button></div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="keepin">
+                                <label class="form-check-label" for="keepin">Keep me signed in</label>
+                            </div>
+                        </div>
+                        <div class="login-form-row forgot-password-wrapper">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+       
+    </div>
+
+
+    <div class="registration-section">
+        <div class="signup-wrapper">
+            <h1 class="section-title">Sign Up</h1>
+            <p>
+                Create an Ainstein account by first registering with your Microsoft account.
+            </p>
+            <button class="btn btn-light" type="button"> Register with Pershing</button>
+        </div>
+        <img src="~/Content/images/watermark-ainsteinai-logo-purple.png" alt="" />
+
+        <div class="row d-flex fixed-bottom flex-column ">
+            <p class="copyright-footer">Copyright 2023  StockSmart Inc.</p>
+        </div>
+    </div>
+
+
+
+</main>

@@ -1,0 +1,181 @@
+﻿@*
+    ----------------------------------------------------------------------------
+    Copyright (c) Microsoft Corporation.
+    Licensed under the MIT license.
+    ----------------------------------------------------------------------------
+*@
+
+@model AinsteinDemo.Models.ReportEmbedConfig
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form>
+                <div class="form-group searchBar">
+                    <input class="form-control" id="EarningsCo" placeholder="Enter Ticker Symbol, e.g., AAPL">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="row">
+                    <div class="col-12 menu-tab">
+                        <ul id="nav-tab" role="tablist">
+                            <li>
+                                <a class="active" id="nav-industry-tab" data-toggle="tab" href="/ETF/EmbedReport/0"
+                                   aria-controls="nav-industry" aria-selected="false" tabindex="-1">
+                                    Industry
+                                    View
+                                </a>
+                            </li>
+                            <li>
+                                <a id="nav-issuer-tab" data-toggle="tab" href="/ETF/EmbedReport/1"
+                                   aria-controls="nav-issuer" aria-selected="false" tabindex="-1">
+                                    Issuer
+                                    View
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-4">
+
+                    <div id="embedContainer"></div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+    $('nav-industry-tab').removeClass('active');
+    $('nav-issuer-tab').removeClass('active');
+  
+
+    // Bootstrap the embed container for report
+    powerbi.bootstrap(reportContainer, { type: 'report' });
+    
+
+    // Read embed application token from Model
+    const accessToken = "@Model.EmbedToken.Token";
+
+    // You can embed different reports as per your need by changing the index
+    // Read embed URL from Model
+    const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";
+   
+
+    // Read report Id from Model
+    const embedReportId = "@Model.EmbedReports[0].ReportId";
+    
+
+    // Use the token expiry to regenerate Embed token for seamless end user experience
+    // Refer https://aka.ms/RefreshEmbedToken
+    const tokenExpiry = "@Model.EmbedToken.Expiration";
+
+    // Get models. models contains enums that can be used.
+    const models = window['powerbi-client'].models;
+
+    // Embed configuration used to describe the what and how to embed.
+    // This object is used when calling powerbi.embed.
+    // This also includes settings and options such as filters.
+    // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+    const config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: accessToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: models.Permissions.All,
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: false,
+            navContentPaneEnabled: false
+        }
+    };
+   
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+   
+</script>
+
+<!-- Third-party scripts -->
+<!-- bootstrap page says to put these right before closing body tag... -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="~/scripts/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tooltip_ie.css" />
+<![endif]-->
+
+<script>
+    $(document).ready(function () {
+        //init popovers
+        $('[data-toggle="popover"]').popover({ html: true, container: 'body' });
+        $('[data-toggle="popover"]').css('z-index', 9999);
+
+        //disable back button
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const tabs = document.querySelectorAll('#nav-tab > li [role="tab"]');
+            const tabList = document.querySelector('#nav-tab[role="tablist"]');
+
+            // Add a click event handler to each tab
+            tabs.forEach(tab => {
+                tab.addEventListener("click", changeTabs);
+            });
+
+            // Enable arrow navigation between tabs in the tab list
+            let tabFocus = 0;
+
+            tabList.addEventListener("keydown", e => {
+                // Move right
+                if (e.keyCode === 39 || e.keyCode === 37) {
+                    tabs[tabFocus].setAttribute("tabindex", -1);
+                    if (e.keyCode === 39) {
+                        tabFocus++;
+                        // If we're at the end, go to the start
+                        if (tabFocus >= tabs.length) {
+                            tabFocus = 0;
+                        }
+                        // Move left
+                    } else if (e.keyCode === 37) {
+                        tabFocus--;
+                        // If we're at the start, move to the end
+                        if (tabFocus < 0) {
+                            tabFocus = tabs.length - 1;
+                        }
+                    }
+
+                    tabs[tabFocus].setAttribute("tabindex", 0);
+                    tabs[tabFocus].focus();
+                }
+            });
+        });
+    });
+
+    function changeTabs(e) {
+        const target = e.target;
+        const parent = target.parentNode;
+        const grandparent = parent.parentNode;
+        grandparent
+            .querySelectorAll('[aria-selected="true"]')
+            .forEach(t => { t.setAttribute("aria-selected", false); t.setAttribute("class", ""); });
+    }
+</script>

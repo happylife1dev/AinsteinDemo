@@ -1,0 +1,28 @@
+﻿<!-- @model AinsteinDemo.Models.Vector
+
+@{ ViewBag.Title = "Vector";
+    Layout = "~/Views/Shared/_LayoutIFrame.cshtml";
+}
+
+
+<div id="vectordiv">
+    <!--    <ul>
+          <li>StockSmart Rates each Company [A-thru-F] on multiple Factors (Timing, Valuation, Growth, Earnings, Safety).</li>
+          <li>Companies are compared to their Peer Group and graded on a curve.</li>
+          <li>The top 20% are [A], 2nd 20% are [B], middle 20% are [C], 4th 20% [D], and bottom 20% are [F].</li>
+        </ul>
+    -->
+
+    <div id="ratingsBar" class="ratingDetailBar">
+        <div id="rrsHeading">
+        </div>
+        <div id="rrsSegments">
+        </div>
+    </div>
+
+</div><!-- vectordiv -->
+<script>
+    var url = "/API/v1/Vector/@Model.tickerSymbol";
+    console.log(url);
+</script>
+<script src="~/scripts/loadRatings.js"></script> -->

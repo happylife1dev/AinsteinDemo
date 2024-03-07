@@ -1,0 +1,251 @@
+﻿<!-- @model AinsteinDemo.Models.Cube
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/style/ratings.css">
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form id="portfolioform" style="height: 100%;">
+            
+            <div class="tab-content" id="v-pills-tabContent" style="height: 100%;">
+                <div class="row">
+                    <div class="col-12 menu-tab">
+                        <ul id="nav-tab" role="tablist">
+                            <li>
+                                <a class="active" id="nav-cube-tab" data-toggle="tab" href="/Portfolio/Index"
+                                   aria-controls="nav-cube" aria-selected="true" tabindex="0">
+                                    <i class="fa fa-cube"></i>
+                                    Cube View
+                                </a>
+                            </li>
+
+                            <li>
+                                <a id="nav-check-tab" data-toggle="tab" href="/Portfolio/Checkup/2"
+                                   aria-controls="nav-check" aria-selected="false" tabindex="-1">
+                                    <i class="fa fa-stethoscope"></i>
+                                    Portfolio
+                                    Check Up
+                                </a>
+                            </li>
+                            <li>
+                                <a id="nav-holdings-tab" data-toggle="tab" href="/Portfolio/Hidden/3"
+                                   aria-controls="nav-holdings" aria-selected="false" tabindex="-1">
+                                    <i class="fa fa-folder"></i>
+                                    Hidden
+                                    Holdings
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tooltip_container" style="width: 90%; position: absolute; left: 100px; z-index: 1; top: 8em;">
+                    <div id="tooltip_container" class="tooltip-static-view"></div>
+                    <div id="ratingsBar" class="ratingDetailBar">
+                        <div id="rrsHeading">
+                        </div>
+                        <div id="rrsSegments">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ribbon-wrapper">
+
+                    <div class="ribbon-heading">
+                        <div class="title-text-wrapper">
+                            <div id="ribbon-title" class="title">Apple, Inc.</div>
+                            <div class="sub-text">Risk Discovery Ribbon</div>
+                        </div>
+                        <div id="ribbon-ainstein-rating" class="rating rating_text_C">C</div>
+                    </div>
+
+                    <div class="industry-wrapper">
+                        <div class="industry-row">
+                            <div class="text-wrapper">
+                                <div id="ribbon-subindustry" class="title">Software & Services</div>
+                                <div class="sub-text">Subindustry</div>
+                            </div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-subindustry-rating" class="rating rating_text_B">
+                                B
+                            </div>
+                        </div>
+
+                        <div class="industry-row">
+                            <div class="text-wrapper">
+                                <div id="ribbon-industry" class="title">Technology</div>
+                                <div class="sub-text">Industry</div>
+                            </div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-industry-rating" class="rating rating_text_B">
+                                B
+                            </div>
+                        </div>
+
+                        <div class="industry-row">
+                            <div class="text-wrapper">
+                                <div id="ribbon-sector" class="title">Software & Services</div>
+                                <div class="sub-text">Sector</div>
+                            </div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-sector-rating" class="rating rating_text_B">
+                                B
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ribbon-title" class="ribbon-divider">
+                        Risk Ratings
+                    </div>
+
+                    <div class="metric-list-wrapper">
+                        <div class="metric">
+                            <div class="name">Value</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-value-rating" class="rating rating_text_A">A</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Earnings Growth</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-earnings-growth-rating" class="rating rating_text_C">C</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Performance</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-performance-rating" class="rating rating_text_B">B</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">ESG</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-ESG" class="rating rating_text_F">F</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Earnings</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-earnings" class="rating rating_text_B">B</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Revenue</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-revenue" class="rating rating_text_A">A</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Cash Flow</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-cashflow" class="rating rating_text_A">A</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Margins</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-margin" class="rating rating_text_A">A</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Trading Sentiment</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-sentiment" class="rating rating_text_NONE">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Options</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-options" class="rating rating_text_NONE">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Bonds</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-bonds" class="rating rating_text_NONE">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">Short Interest</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-short-interest" class="rating rating_text_NONE">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="name">News Sentiment</div>
+                            <i class="fas fa-angle-right active-indicator"></i>
+                            <div id="ribbon-news-sentiment" class="rating rating_text_NONE">-</div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+
+                <div class="row content-section">
+                    
+                    
+
+                    <div class="cube-wrapper" style="overflow-x: auto;">
+
+
+                        <iframe id="portcubeframe" src="/Portfolio/Test/1"
+                                scrolling="no" style="overflow: visible;display: block;width: 100%;height: 750px; min-width: 990px"
+                                frameborder="0"></iframe>
+
+                        <div class="bubble-popup-source-html">
+                            <div id="bubble-popup-wrapper" style="position: fixed !important; background-color: #ffffff; border: 1px solid #ddd; border-radius: 3px; display: none;">
+                                <div id="SecurityValues">
+                                    <span id="lastPicked" style="display: none;"></span>
+                                    <div class="popup-header">
+                                        <div>
+                                            <span id="popup-company-name">Honeywell Interntional, Inc</span>
+                                            <span id="company-symbol">HON</span>
+                                        </div>
+                                        <div>
+                                            <span id="company-cap">Market Cap $1.88T</span>
+                                        </div>
+                                    </div>
+                                    <table class="popup-content-wrapper">
+                                        <tr>
+                                            <td><span class="popup-label">Ainstein Rating</span></td>
+                                           <td><span id="ainstein-rating"><span class="rating circle rating_text_A">A</span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="popup-label">Value</span></td>
+                                            <td><span id="value-rating">27.6 X</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="popup-label">Earnings Growth</span></td>
+                                            <td><span id="earnings-rating">3%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="popup-label">Trading Risk</span></td>
+                                            <td><span id="ainstein-rating"><span class="rating rating_text_D">D</span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="popup-label">ESG Risk</span></td>
+                                            <td><span id="ainstein-rating"><span class="rating rating_text_B">B</span></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div><!-- floating_vector -->
+                        </div><!-- tooltip-source-html -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script type="text/javascript" src="~/scripts/three.min.js"></script>
+<script type="text/javascript" src="~/scripts/OrbitControls.js"></script>
+<script type="text/javascript" src="~/scripts/tween.min.js"></script>
+<script type="text/javascript" src="~/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="~/scripts/d3.min.js"></script>
+<script type="text/javascript" src="~/scripts/tooltip.js"></script>
+<!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tooltip_ie.css" />
+<![endif]-->
+<script>
+    var url = "/API/v1/Cube/1";
+</script>
+<script src="~/scripts/app.PortCube.js"></script> -->

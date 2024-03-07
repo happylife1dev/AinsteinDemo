@@ -1,0 +1,48 @@
+﻿@model AinsteinDemo.Models.Cube
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form>
+            <div class="form-group searchBar">
+                <input class="form-control" id="EarningsCo" placeholder="Enter ETF Symbol, e.g., QQQ">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="row">
+                    <div class="col-12 menu-tab">
+                        <ul id="nav-tab" role="tablist">
+                            <li>
+                                <a id="nav-constituents-cube-tab" data-toggle="tab" href="/ETF/Constituents/1"
+                                   aria-controls="nav-issuer" aria-selected="false" tabindex="-1">
+                                    Constituents Cube
+                                </a>
+                            </li>
+                            <li>
+                                <a class="active" id="nav-industry-tab" data-toggle="tab" href="/ETF/Industry/0"
+                                   aria-controls="nav-industry" aria-selected="true" tabindex="0">
+                                    Industry
+                                    View
+                                </a>
+                            </li>
+                            <li>
+                                <a id="nav-issuer-tab" data-toggle="tab" href="/ETF/Issuer/1"
+                                   aria-controls="nav-issuer" aria-selected="false" tabindex="-1">
+                                    Issuer
+                                    View
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+    <script src="~/scripts/app.PortCube.js"></script>

@@ -1,0 +1,160 @@
+﻿@*
+    ----------------------------------------------------------------------------
+    Copyright (c) Microsoft Corporation.
+    Licensed under the MIT license.
+    ----------------------------------------------------------------------------
+*@
+
+@model AinsteinDemo.Models.ReportEmbedConfig
+
+@{ ViewBag.Title = "Annual";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div style="display: flex; height:100%">
+    @Html.Partial("~/Views/Shared/NavPanel.cshtml")
+    <main class="main-container" role="main">
+        <form>
+            <div class="form-group searchBar">
+                <input class="form-control" id="search_tags" placeholder="Enter Ticker Symbol, e.g., AAPL">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="row">
+                            <div class="col-12 menu-tab mt-4">
+                                @*     <img src="~/Content/images/cube-logo.png" alt="" class="mr-3" />
+                                *@       <ul id="nav-tab" role="tablist">
+                                                    <li>
+                                                        <a class="active" id="nav-earnings-tab" data-toggle="tab" href="/Earnings/Annual/0"
+                                                           aria-controls="nav-earnings" aria-selected="true" tabindex="0">
+                                                            Earnings
+                                                            View
+                                                        </a>
+                            </li>
+                            <li>
+                                <a id="nav-industry2-tab" data-toggle="tab" href="/Earnings/Subindustry/1"
+                                   aria-controls="nav-industry2" aria-selected="false" tabindex="-1">
+                                    Industry
+                                    View
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-4">
+
+                    <div id="embedContainer"></div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Bootstrap the embed container for report
+    powerbi.bootstrap(reportContainer, { type: 'report' });
+
+    // Read embed application token from Model
+    const accessToken = "@Model.EmbedToken.Token";
+
+    // You can embed different reports as per your need by changing the index
+    // Read embed URL from Model
+    const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";
+
+    // Read report Id from Model
+    const embedReportId = "@Model.EmbedReports[0].ReportId";
+
+    // Use the token expiry to regenerate Embed token for seamless end user experience
+    // Refer https://aka.ms/RefreshEmbedToken
+    const tokenExpiry = "@Model.EmbedToken.Expiration";
+
+    // Get models. models contains enums that can be used.
+    const models = window['powerbi-client'].models;
+
+    // Embed configuration used to describe the what and how to embed.
+    // This object is used when calling powerbi.embed.
+    // This also includes settings and options such as filters.
+    // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+
+
+
+    var FILTER_CONFIG = {
+        $schema: "http://powerbi.com/product/schema#basic",
+        target: {
+            table: "Tickers",
+            column: "EPD_Ticker"
+        },
+        operator: 'In',
+        values: ['AAPL']
+    }
+    const config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: accessToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: models.Permissions.All,
+        filters: [FILTER_CONFIG],
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: true,
+            navContentPaneEnabled: true
+        }
+    };
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+ $(document).ready(function (e) {
+        /*
+        $('#EarningsCoTags').inputTags({
+
+            tags: ['AAPL'],
+
+            change: function ($elem) {
+                var tagsListArray = $elem.tags;
+                if (tagsListArray.length == 0) return;
+                var basicFilter = {
+                    $schema: "http://powerbi.com/product/schema#basic",
+                    target: {
+                        table: "Tickers",
+                        column: "EPD_Ticker"
+                    },
+                    operator: 'In',
+                    values: tagsListArray
+                };
+                report.setFilters([basicFilter]);
+            }
+        });
+        */
+        $("#search_tags").autocomplete({
+            source: "/API/v1/GetCompany",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+                ui.item.value = ui.item.label;
+                var basicFilter = {
+                    $schema: "http://powerbi.com/product/schema#basic",
+                    target: {
+                        table: "Tickers",
+                        column: "EPD_Ticker"
+                    },
+                    operator: 'In',
+                    values: [ui.item.id]
+                };
+                report.setFilters([basicFilter]);
+            }
+        });
+    });
+
+
+
+
+

@@ -1,0 +1,240 @@
+body {
+	font-family: 'Montserrat', Helvetica, Arial, sans-serif,;
+}
+h1, h2, h3, h4, h5{font-family: 'Montserrat', sans-serif;}
+a, img, li{border:none; list-style:none; outline:none}
+a:hover{text-decoration:none}
+img{max-width:100%}
+
+
+.fa, .fas, .far {
+	font-weight: 400;
+}
+
+
+.main-container {
+	position: absolute;
+	top: 56px;
+	left: 200px;
+	bottom: 0;
+	right: 0;
+}
+
+#body-wrapper{
+	padding: 0;
+}
+
+.bd-sidebar {
+	-webkit-box-ordinal-group: 1;
+	-ms-flex-order: 0;
+	order: 0;
+	border-right: 4px solid #9f2f83
+}
+.bd-sidebar{position:-webkit-sticky; position:sticky; z-index:1000; background-color:#f1f1f1}
+
+div.inputTags-list {
+	display: flex;
+	width: 100%;
+	border-radius: 4px;
+	height: 46px;
+	border:#fefefe;
+	background: #fff !important;
+	padding: 0 !important;
+	box-shadow: none;
+}
+
+div.inputTags-list span.inputTags-item {
+	display: flex;
+	flex-direction: row;
+	background-color: #1a898d;
+	text-align: center;
+	color: #fff;
+	opacity: 1;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	justify-content: center;
+	align-items: center;
+	padding: 0 0 0 5px;
+	margin: 6px;
+}
+
+div.inputTags-list span.inputTags-item i {
+	position: relative !important;
+	font-size: 22px;
+	cursor: pointer;
+	z-index: 10;
+	font-weight: 400;
+	font-family: sans-serif;
+	line-height: 1;
+	margin-left: 10px;
+	align-self: self-end;
+}
+
+div.inputTags-list span.inputTags-item i:hover {
+	color: #DDD !important;
+}
+
+#nav-tab{
+	margin-top: 4px;
+}
+
+.menu-tab {
+	position: fixed;
+	top: 0px;
+	left: 190px;
+	width: 100%;
+	padding: .75em;
+	overflow-x: hidden;
+	margin-left: 10px;
+	z-index: 200;
+	max-width: 80vh;
+	margin-top: 0px;
+	height: 79px;
+	padding-bottom: 0px;
+}
+
+.menu-tab ul {
+	display: inline-block;
+	margin: 0;
+	width: max-content;
+	padding: 0;
+}	
+
+.menu-tab ul li{
+	display:inline-block; 
+	vertical-align:middle;
+	padding: 0;
+}
+
+.menu-tab ul li a {
+	padding: 11px 14px 8px;
+	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+	color: #fff;
+	font-weight: 400;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.menu-tab ul li a:hover, .menu-tab ul li a.active {
+	background: #6AA0E7;
+	
+}
+
+
+
+
+@media (max-width:1000px) {
+	.menu-tab {
+		position: fixed;
+		top: 90px;
+		background-color: #0078d3;
+		margin-left: 120px;
+		height: fit-content;
+	}
+		.menu-tab ul li {
+			display:list-item;
+			vertical-align: middle
+
+		}
+
+}
+.mobile-menu{display:none}
+.mobile-menu .nav-link{font:20px 'Montserrat', sans-serif; color:#000 !important; padding:15px 30px !important; margin:5px 0}
+.mobile-menu .nav-link:hover, .mobile-menu .active a{background-color:#444; color:#fff !important; border-radius:5px}
+.mobile-menu .nav-link img{width:30px; margin-right:10px}
+
+.tab-pane h1{font-size:25px}
+.tab-pane h2{font-size:18px}
+
+.models-forecast input, .models-forecast select{margin-right:20px}
+.models-forecast td{font-size:16px; padding:5px}
+
+	
+footer{background-color:#ed8d00}
+footer p{color:#fff; margin:1rem 0 0; font-size:14px}
+
+/*misc*/
+.carousel-item img{max-width:75%}
+.carousel-control-next, .carousel-control-prev{width:4%}
+.carousel-control-prev-icon, .carousel-control-next-icon{height:100px; width:100px}
+.carousel-control-next-icon:after
+{
+	content: '\f061';
+	font-family:"Font Awesome 5 Free";
+	font-size: 45px;
+	font-weight:600;
+	color: #ed8d00;
+}
+
+.carousel-control-prev-icon:after {
+	content: '\f060';
+	font-family:"Font Awesome 5 Free";
+	font-weight:600;
+	font-size: 45px;
+	color: #ed8d00;
+}
+
+@media (min-width:1200px) {
+	.bd-sidebar {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 1 280px;
+		flex: 0 1 280px;
+	}
+
+	.bd-content{
+		-webkit-box-flex: 0;
+		-ms-flex: 0 1 100%;
+		flex: 0 1 100%;
+	}
+}
+
+@media only screen and (max-width: 1150px) {
+	.searchBar {
+		width: 400px;
+		
+	}
+}
+
+@media only screen and (max-width: 975px) {
+	.searchBar {
+		left: 300px;
+	}
+}
+
+@media only screen and (max-width: 690px) {
+	.searchBar {
+		width: 200px;
+		right: unset !important;
+	}
+}
+
+@media (max-width:480px) {
+	.bd-sidebar {
+		border-right: none
+	}
+
+	.searchBar {
+		left: 0px;
+		opacity: 1;
+	}
+
+	.searchBar button {
+		width: 70px;
+		font-size: 20px;
+	}
+
+	
+
+	footer, footer p {
+		text-align: center
+	}
+}
+
+.ui-autocomplete-loading {
+	background: white url("/Content/images/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+
+.ui-menu .ui-menu-item {
+	padding: 3px 22px;
+}
